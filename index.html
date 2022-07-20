@@ -1,0 +1,81 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="javascript.js">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+  <div class="header container">
+    <h2>my to do list</h2>
+    <div class="header-1"> 
+      <input type="text" id="getValue" placeholder="Title ...">
+      <span onclick="getList()">Add <i class="fa-brands fa-github-alt"></i></span>
+    </div>
+  </div>
+
+  <ul id="resultList" class="list container">
+    <!-- <li onclick="remove()" class="todo"></li> -->
+  </ul>
+
+
+  <script>
+    function getList() {
+      var x = document.getElementById('getValue').value
+      var p = document.createElement('p')
+      var li = document.createElement('li')
+      p.append(x)
+      li.append(p)
+      var close = document.createElement('button')
+      close.append('xóa')
+      li.append(close)
+      var ul = document.getElementById('resultList')
+      ul.append(li)
+
+      // xóa 
+      close.addEventListener("click", function () {
+        li.remove()
+      })
+
+      //tạo thêm nút edit
+      edit = document.createElement('button')
+      edit.append('chỉnh sửa')
+      li.append(edit)
+      edit.addEventListener("click", function () {
+        var input = document.createElement('input')
+        var save = document.createElement('button')
+        save.append('lưu')
+        li.append(input)
+        li.append(save)
+
+        //lấy giá trị x bỏ vào input 
+        var pa = this.parentElement
+        var element = pa.getElementsByTagName("p")[0]
+        input.value = element.textContent
+
+        //set id=new cho input
+        //thêm function cho save
+        //đặt biến mới là shay nhận giá trị từ new
+        //tạo biến mới là giá trị cha 
+        input.setAttribute("id", "new")
+        save.addEventListener('click', function () {
+          var shay = document.getElementById('new').value
+          var getvalue = this.parentElement
+          getvalue.getElementsByTagName('p')[0].innerHTML = shay
+          input.remove()
+          save.remove()
+        })
+      })
+    }
+
+  </script>
+</body>
+
+</html>
